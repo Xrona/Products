@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\PropertyValue;
 
 /**
  * This is the model class for table "value".
@@ -62,5 +63,18 @@ class Value extends \yii\db\ActiveRecord
     public function getProperties()
     {
         return $this->hasMany(Property::className(), ['id' => 'property_id'])->viaTable('property_value', ['value_id' => 'id']);
+    }
+
+    /**
+     * Save values for the property
+     */
+    public function saveValue($id)
+    {
+        if($this->save()) {
+            $data = new PropertyValue();
+            $data->property_id = $id;
+            $data->value_id = $this->id;
+            return $data->save();
+        }
     }
 }

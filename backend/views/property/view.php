@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('New Value', ['newValue', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Create Value', ['value-create', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -45,8 +45,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr>
             <td  ><?= $value['title']; ?></td>
             <td>
-                <a href="" id="<?= $value['id'] ?>"><span class="glyphicon glyphicon-trash"></span></a>
-                <a href="" id="<?= $value['id'] ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['value-update', 'id' => $model->id, 'idv' => $value['id']]) ?>
+                <?= Html::a('<span class="glyphicon glyphicon-trash">', ['value-delete', 'id' => $model->id,'idv' => $value['id']], [
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                    ],
+                ]) ?>
             </td>
         </tr>
 

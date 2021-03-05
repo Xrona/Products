@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "product".
  *
  * @property int $id
- * @property string|null $titile
+ * @property string|null $title
  * @property string|null $description
  *
  * @property ProductPropertyValue[] $productPropertyValues
@@ -31,7 +31,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
-            [['titile'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,7 +42,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'titile' => 'Titile',
+            'title' => 'Title',
             'description' => 'Description',
         ];
     }
@@ -71,6 +71,5 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Value::class, ['id' => 'value_id'])->viaTable('product_property_value', ['product_id' => 'id']);
     }
-
 
 }

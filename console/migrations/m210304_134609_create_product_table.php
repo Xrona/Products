@@ -14,7 +14,7 @@ class m210304_134609_create_product_table extends Migration
     {
         $this->createTable('{{%product}}', [
             'id' => $this->primaryKey(),
-            'titile' => $this->string(),
+            'title' => $this->string(),
             'description' => $this->text(),
         ]);
     }

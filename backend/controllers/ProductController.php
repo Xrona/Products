@@ -5,10 +5,13 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Product;
 use backend\models\ProductPropertyValue;
+use backend\models\Value;
+use backend\models\Property;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -61,6 +64,40 @@ class ProductController extends Controller
             'model' => $model,
             'dataProvider' => $dataProvider,
          
+        ]);
+    }
+
+    public function actionAddProperty($id)
+    {
+        $model = new Property();
+        $propertiesList = ArrayHelper::map(Property::find()->all(), 'id', 'title');
+
+        if ($model->load(Yii::$app->request->post())) {
+            $id_property = ArrayHelper::getValue(Yii::$app->request->post(), 'Property.title');
+            return $this->redirect( ['add-value','id'=> $id, 'idp'=> $id_property]);
+        }
+
+        return $this->render('addProperty', [
+            'model' => $model,
+            'propertiesList' => $propertiesList,
+        ]);
+    }
+
+    public function actionAddValue($id,$idp)
+    {
+        $model = new Value();
+        $valueList = ArrayHelper::map(Value::find()->joinWith('propertyValues')->where(['property_id' => $idp])->all(), 'id', 'title');
+
+        if ($model->load(Yii::$app->request->post())) {
+            $id_value = ArrayHelper::getValue(Yii::$app->request->post(), 'Value.title');
+            $saveModel = new ProductPropertyValue();
+            $saveModel->saveData($id,$idp,$id_value);
+            return $this->redirect( ['view','id'=> $id]);
+        }
+
+        return $this->render('addValue',[
+            'model' => $model,
+            'valueList' => $valueList,
         ]);
     }
 

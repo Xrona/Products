@@ -1,8 +1,9 @@
 <?php
 
 namespace backend\models;
-
+use yii\helpers\ArrayHelper;
 use Yii;
+use backend\models\ProductPropertyValue;
 
 /**
  * This is the model class for table "property".
@@ -94,4 +95,7 @@ class Property extends \yii\db\ActiveRecord
             ->asArray()
             ->all();
     }
+
+
+
 }

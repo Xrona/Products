@@ -92,4 +92,14 @@ class ProductPropertyValue extends \yii\db\ActiveRecord
                 ->asArray()
                 ->all();
     }
+
+    public function saveData($id, $idp, $idv)
+    {
+        $this->product_id = $id;
+        $this->property_id = $idp;
+        $this->value_id = $idv;
+        return $this->save();
+    }
+
+
 }
