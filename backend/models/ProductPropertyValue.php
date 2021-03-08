@@ -82,6 +82,12 @@ class ProductPropertyValue extends \yii\db\ActiveRecord
         return $this->hasOne(Value::className(), ['id' => 'value_id']);
     }
 
+    /**
+     *  Gets array with property and value of product by d
+     *
+     *  @param integer $id
+     * @return array
+     */
     public function getPropertyValueList($id)
     {
        return $this->find()
@@ -93,6 +99,14 @@ class ProductPropertyValue extends \yii\db\ActiveRecord
                 ->all();
     }
 
+    /**
+     *  Save property and value  of product by id
+     * 
+     * @param integer $id
+     * @param integer $idp
+     * @param integer $idv
+     * @return mixed
+     */
     public function saveData($id, $idp, $idv)
     {
         $this->product_id = $id;

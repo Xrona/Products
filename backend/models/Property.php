@@ -87,6 +87,12 @@ class Property extends \yii\db\ActiveRecord
         return $this->hasMany(Value::class, ['id' => 'value_id'])->viaTable('property_value', ['property_id' => 'id']);
     }
 
+    /**
+     *  Gets array values for property by id
+     * 
+     * @param integer $id
+     * @return array
+     */
     public function getValueList($id)
     {
         return $this->find()

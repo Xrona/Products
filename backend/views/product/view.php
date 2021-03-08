@@ -7,6 +7,7 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
+/* @var $propertyValueList backend\models\ProductPropertyValue */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
@@ -41,14 +42,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h2>Свойства</h2>
     <table class="table table-striped table-bordered detail-view">
-        <?php foreach($dataProvider as $key=>$value): ?>
+        <?php foreach($propertyValueList as $key=>$value): ?>
         <tr>
             <th data-id="<?= $value['property_id'] ?>"><?= $value['prop'] ?></th>
             <td data-id="<?= $value['value_id'] ?>"><?= $value['val'] ?></td>
             <td>
-                <a href="<?= Url::to(['property/view/'.$value['property_id']]) ?>"><span class="glyphicon glyphicon-eye-open"></span></a>
-                <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
-                <a href=""><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="<?= Url::to(['property/view', 'id' => $value['property_id']]) ?>"><span class="glyphicon glyphicon-eye-open"></span></a>
+                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update-value', 'id' => $value['product_id']]) ?>
+                <?= Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-product-property-value', 'id' => $value['product_id']], [
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                    ],
+                ]) ?>
             </td>
         </tr>
         <?php endforeach; ?>

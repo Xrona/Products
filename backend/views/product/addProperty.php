@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
+/* @var $propertyList backend\models\Property */
 
 $this->title = 'Update Product: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
@@ -14,16 +15,12 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="product-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1>Select Property</h1>
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'title')->dropDownList($propertiesList, ['prompt' => 'select property']) ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
+<?= $this->render('_formPropertyValue', [
+        'model' => $model,
+        'list' => $propertyList,
+        'name' => 'title',
+    ]) ?>
 
 </div>

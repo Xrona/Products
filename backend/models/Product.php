@@ -1,7 +1,6 @@
 <?php
 
 namespace backend\models;
-use yii\data\ActiveDataProvider;
 use Yii;
 
 /**

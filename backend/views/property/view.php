@@ -6,6 +6,8 @@ use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Property */
+/* @var $valueList backend\models\Value */
+
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Properties', 'url' => ['index']];
